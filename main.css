@@ -1,0 +1,11 @@
+body {
+	margin: 50px 50px;
+}
+
+a.hidden {
+	display: none;
+}
+
+.bottom {
+	padding-top: 20px;
+}
