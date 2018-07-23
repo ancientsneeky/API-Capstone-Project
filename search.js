@@ -89,6 +89,7 @@ function displayPOKECARDSearchData(data) {
   // handlePrevButton(data);
   // displayPrevButton();
   $('.js-search-results').html(results);
+  handleImageClick();
 }
 
 function watchSubmit() {
@@ -101,6 +102,14 @@ function watchSubmit() {
 
 function getSubmitValue(){
   return $('.js-query').val();
+}
+
+function handleImageClick() {
+	console.log("line 108 called")
+  $('.js-card-result').on('click', event => {
+    $('.js-search-results > *').addClass('hidden');
+    console.log('image clicked');
+  });
 }
 
 // function pageCountMinusOne(){
