@@ -2,7 +2,8 @@ const POKECARD_SEARCH_INDEX_URL = 'https://api.pokemontcg.io/v1/cards';
 // const EBAY_SEARCH_URL = 'https://api.ebay.com/buy/browse/v1/item_summary/search';
 const EBAY_SEARCH_URL = 'http://svcs.ebay.com/services/search/FindingService/v1';
 // //working TCG API search
-function getDataFromApi(searchTerm, callback) {
+
+function getDataFromPokemonApi(searchTerm, callback) {
   const settings = {
     url: POKECARD_SEARCH_INDEX_URL,
     data: {
@@ -15,7 +16,7 @@ function getDataFromApi(searchTerm, callback) {
   $.ajax(settings);
 }
 
-//   function getDataFromApi(searchTerm, callback) {
+  function getDataFromEbayApi(searchTerm, callback) {
 //   // console.log('api called');
 //   // const query = {
 //   //   name: `${searchTerm}`
@@ -23,33 +24,39 @@ function getDataFromApi(searchTerm, callback) {
 //   // $.getJSON(POKECARD_SEARCH_INDEX_URL, query, callback);
 
 
-//   const settings = {
-//     url: EBAY_SEARCH_URL,
-//     data: {
-//       "OPERATION-NAME": 'findItemsByKeywords',
-//       "SERVICE-VERSION": "1.0",
-//       "GLOBAL-ID": "EBAY-US",
-//       keywords: `${searchTerm}`,
-//       "SECURITY-APPNAME": "ChrisMag-pokesear-PRD-48bb65212-9e1a0bc9",
-//       "RESPONSE-DATA-FORMAT": "json",
-//       callback: "_cb_findItemsByKeywords",
-//       'paginationInput.entriesPerPage': 3
-//     },    
-//     dataType: 'jsonp',
-//     type: 'GET',
-//     success: callback
-//   }
-//   $.ajax(settings);
-// }
+const EBAY_SEARCH_URL = 'http://svcs.ebay.com/services/search/FindingService/v1';
+
+  const settings = {
+    url: EBAY_SEARCH_URL,
+    data: {
+      "OPERATION-NAME": 'findItemsByKeywords',
+      "SERVICE-VERSION": "1.0",
+      "GLOBAL-ID": "EBAY-US",
+      keywords: `${searchTerm}`,
+      "SECURITY-APPNAME": "ChrisMag-pokesear-PRD-48bb65212-9e1a0bc9",
+      "RESPONSE-DATA-FORMAT": "json",
+      callback: "_cb_findItemsByKeywords",
+      'paginationInput.entriesPerPage': 3
+    },    
+    dataType: 'jsonp',
+    type: 'GET',
+    success: callback
+  }
+  $.ajax(settings);
+}
 
 function renderResult(result) {
   // console.log(result);
-  return `
-    <div>
+  const cardInfo = `${result.name} ${result.id}`
+  const htmlDiv = `
+    <div class="js-card-result" id="${cardInfo}">
       <h2>
-      <a class="js-result-name" href="${result.searchResult.viewItemURL}" target="_blank"><img src="${result.searchResult.item.galleryURL[0]}"/></h2>
+      ${result.name}
+      <img src="${result.imageUrl}"/>
+      </h2>
     </div>
-  `
+  `;
+  return htmlDiv;
       // </a> by <a class="js-channel-name" href="https://www.POKECARD.com/channel/${result.snippet.channelId}"> ${result.snippet.channelTitle}</a>
 }
 
@@ -69,20 +76,26 @@ function renderResult(result) {
 //   $('.js-search-results').empty();
 // }
 
+function displayEbaySearchData(data) {
+  console.log(data);
+  console.log(data.findItemsByKeywordsResponse["0"].searchResult[0].item);
+}
+
 function displayPOKECARDSearchData(data) {
   console.log(data);
-  // const results = data.items.map((item, index) => renderResult(item));
+  const results = data.cards.map((item, index) => renderResult(item));
   // $('.js-search-page-button').html(renderPageButtons());
   // handleNextButton(data);
   // handlePrevButton(data);
   // displayPrevButton();
-  // $('.js-search-results').html(results);
+  $('.js-search-results').html(results);
 }
 
 function watchSubmit() {
   $('.js-search-form').submit(event => {
     event.preventDefault();
-    getDataFromApi(getSubmitValue(), displayPOKECARDSearchData);
+    getDataFromPokemonApi(getSubmitValue(), displayPOKECARDSearchData);
+    getDataFromEbayApi(getSubmitValue(), displayEbaySearchData);
   });
 }
 
