@@ -17,15 +17,6 @@ function getDataFromPokemonApi(searchTerm, callback) {
 }
 
   function getDataFromEbayApi(searchTerm, callback) {
-//   // console.log('api called');
-//   // const query = {
-//   //   name: `${searchTerm}`
-//   // }
-//   // $.getJSON(POKECARD_SEARCH_INDEX_URL, query, callback);
-
-
-const EBAY_SEARCH_URL = 'http://svcs.ebay.com/services/search/FindingService/v1';
-
   const settings = {
     url: EBAY_SEARCH_URL,
     data: {
@@ -36,7 +27,7 @@ const EBAY_SEARCH_URL = 'http://svcs.ebay.com/services/search/FindingService/v1'
       "SECURITY-APPNAME": "ChrisMag-pokesear-PRD-48bb65212-9e1a0bc9",
       "RESPONSE-DATA-FORMAT": "json",
       callback: "_cb_findItemsByKeywords",
-      'paginationInput.entriesPerPage': 3
+      'paginationInput.entriesPerPage': 9
     },    
     dataType: 'jsonp',
     type: 'GET',
@@ -45,19 +36,35 @@ const EBAY_SEARCH_URL = 'http://svcs.ebay.com/services/search/FindingService/v1'
   $.ajax(settings);
 }
 
-function renderResult(result) {
+function renderPokeResult(result) {
   // console.log(result);
-  const cardInfo = `${result.name} ${result.id}`
+  const cardInfo = `${result.name}`
   const htmlDiv = `
-    <div class="js-card-result" id="${cardInfo}">
+    <div class="js-card-result">
       <h2>
       ${result.name}
-      <img src="${result.imageUrl}"/>
+      <img src="${result.imageUrl}" id="${cardInfo}" alt="${cardInfo}"/>
       </h2>
     </div>
   `;
   return htmlDiv;
       // </a> by <a class="js-channel-name" href="https://www.POKECARD.com/channel/${result.snippet.channelId}"> ${result.snippet.channelTitle}</a>
+}
+
+function renderEbayResult(result) {
+  return `
+    <div class="js-card-result col-3">
+      <h2>
+      <p>${result.title[0]}</p>
+      <p>${result.condition[0].conditionDisplayName[0]}</p>
+      <a href="${result.viewItemURL[0]}" target="_blank" rel="noopener noreferrer" class="ebay-link">
+      <img src="${result.galleryURL[0]}" alt="Ebay Image of ${result.title[0]}"/>
+      </a>
+      <p>$${result.sellingStatus[0].currentPrice[0].__value__} USD</p>
+      <p>Shipped from: ${result.location[0]}</p>
+      </h2>
+    </div>
+  `;
 }
 
 // function renderPageButtons(){
@@ -78,12 +85,15 @@ function renderResult(result) {
 
 function displayEbaySearchData(data) {
   console.log(data);
-  console.log(data.findItemsByKeywordsResponse["0"].searchResult[0].item);
+  const unnestedData = data.findItemsByKeywordsResponse["0"].searchResult[0].item;
+  console.log(unnestedData);
+  const results = unnestedData.map((item, index) => renderEbayResult(item));
+  $('.js-ebay-search-results').html(results);
 }
 
 function displayPOKECARDSearchData(data) {
   console.log(data);
-  const results = data.cards.map((item, index) => renderResult(item));
+  const results = data.cards.map((item, index) => renderPokeResult(item));
   // $('.js-search-page-button').html(renderPageButtons());
   // handleNextButton(data);
   // handlePrevButton(data);
@@ -96,7 +106,7 @@ function watchSubmit() {
   $('.js-search-form').submit(event => {
     event.preventDefault();
     getDataFromPokemonApi(getSubmitValue(), displayPOKECARDSearchData);
-    getDataFromEbayApi(getSubmitValue(), displayEbaySearchData);
+    // getDataFromEbayApi(getSubmitValue(), displayEbaySearchData);
   });
 }
 
@@ -104,11 +114,19 @@ function getSubmitValue(){
   return $('.js-query').val();
 }
 
+function toggleHidden() {
+  $('.result').toggleClass('hidden');
+  $('.js-ebay-search-results').toggleClass('hidden');
+}
+
 function handleImageClick() {
 	console.log("line 108 called")
   $('.js-card-result').on('click', event => {
+    const searchTerm = event.target.id;
+    console.log(searchTerm);
     $('.js-search-results > *').addClass('hidden');
-    console.log('image clicked');
+    toggleHidden();
+    getDataFromEbayApi(searchTerm, displayEbaySearchData); 
   });
 }
 

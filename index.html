@@ -15,13 +15,15 @@
         <h1>Search Cards by name for Pokemon TCG Card</h1>
           <form action="#" class="js-search-form">
             <label for="query"></label>
-            <input type="text" class="js-query">
+            <input type="text" class="js-query" value='Charizard'>
             <button type="submit">Search</button>
           </form>
 
-          <h2>Results</h2>
+          <h2 class='result'>Results</h2>
+          <h2 class='result hidden'>Ebay Results</h2>
           <div class="js-search-page-button top"></div>
           <div class="js-search-results"></div>
+          <div class="js-ebay-search-results hidden"></div>
           <div class="js-search-page-button bottom"></div>
       </main>
       <script src="search.js"></script>

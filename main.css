@@ -1,3 +1,7 @@
+*{
+	/*border-box;*/
+}
+
 body {
 	margin: 50px 50px;
 }
@@ -8,4 +12,8 @@ body {
 
 .bottom {
 	padding-top: 20px;
+}
+
+.col-3 {
+	border: 1px solid red;
 }
