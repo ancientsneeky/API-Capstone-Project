@@ -40,10 +40,10 @@ function renderPokeResult(result) {
   // console.log(result);
   const cardInfo = `${result.name}`
   const htmlDiv = `
-    <div class="js-card-result">
+    <div class="js-card-result col-3">
       <h2>
-      ${result.name}
-      <img src="${result.imageUrl}" id="${cardInfo}" alt="${cardInfo}"/>
+        <img src="${result.imageUrl}" class="pokeImg" id="${cardInfo}" alt="${cardInfo}"/>
+        <p class="cardName">${result.name}</p>
       </h2>
     </div>
   `;
@@ -98,6 +98,9 @@ function displayPOKECARDSearchData(data) {
   // handleNextButton(data);
   // handlePrevButton(data);
   // displayPrevButton();
+  const heading = $('.heading');
+  heading.html("Boozinga");
+  heading.toggleClass('hidden');
   $('.js-search-results').html(results);
   handleImageClick();
 }
