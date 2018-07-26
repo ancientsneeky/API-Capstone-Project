@@ -21,6 +21,8 @@
 	float: left;
 	padding-left: 1.0466666%;
 	padding-right: 1.0466666%;
+	padding-top: 1.0466666%;
+	padding-bottom: 1.0466666%;
 }
 
 .col-3, .col-4, .col-6, .col-12 {
@@ -28,8 +30,9 @@
 }
 
 /*start of non mobile defaults*/
+/*content scaleing breaks at 788px*/
 
-@media only screen and (min-width:  640px) {
+@media only screen and (min-width:  788px) {
 	.col-2 {
 		width: 50%;
 	}

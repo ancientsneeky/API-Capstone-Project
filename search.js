@@ -40,7 +40,7 @@ function renderPokeResult(result) {
   // console.log(result);
   const cardInfo = `${result.name}`
   const htmlDiv = `
-    <div class="js-card-result col-3">
+    <div class="js-card-result col-3 searchPlaceHolder">
       <h2>
         <img src="${result.imageUrl}" class="pokeImg" id="${cardInfo}" alt="${cardInfo}"/>
         <p class="cardName">${result.name}</p>
@@ -53,15 +53,15 @@ function renderPokeResult(result) {
 
 function renderEbayResult(result) {
   return `
-    <div class="js-card-result col-3">
+    <div class="js-card-result col-3 searchPlaceHolder">
       <h2>
-      <p>${result.title[0]}</p>
-      <p>${result.condition[0].conditionDisplayName[0]}</p>
+      <p class="ebay Title">${result.title[0]}</p>
+      <p class="ebay Condition">Condition: ${result.condition[0].conditionDisplayName[0]}</p>
       <a href="${result.viewItemURL[0]}" target="_blank" rel="noopener noreferrer" class="ebay-link">
       <img src="${result.galleryURL[0]}" alt="Ebay Image of ${result.title[0]}"/>
       </a>
-      <p>$${result.sellingStatus[0].currentPrice[0].__value__} USD</p>
-      <p>Shipped from: ${result.location[0]}</p>
+      <p class="ebay Price">$${result.sellingStatus[0].currentPrice[0].__value__} USD</p>
+      <p class=ebay Shipping>Shipped from: ${result.location[0]}</p>
       </h2>
     </div>
   `;
@@ -99,7 +99,7 @@ function displayPOKECARDSearchData(data) {
   // handlePrevButton(data);
   // displayPrevButton();
   const heading = $('.heading');
-  heading.html("Boozinga");
+  heading.html("Results");
   heading.toggleClass('hidden');
   $('.js-search-results').html(results);
   handleImageClick();
@@ -128,6 +128,7 @@ function handleImageClick() {
     const searchTerm = event.target.id;
     console.log(searchTerm);
     $('.js-search-results > *').addClass('hidden');
+    $('.heading').html("Ebay Results");
     toggleHidden();
     getDataFromEbayApi(searchTerm, displayEbaySearchData); 
   });

@@ -8,6 +8,19 @@ html {
     margin-right: auto;  
 }
 
+h1, h2 {
+	text-align: center;
+	color: #FFF;
+}
+
+p {
+	word-wrap: break-word;
+}
+
+.ebay-link {
+	text-align: center;
+}
+
 .hidden {
 	display: none;
 }
@@ -16,12 +29,10 @@ html {
 	padding-top: 20px;
 }
 
-.col-3 {
-	border: 1px solid red;
-}
-
 .pokeImg {
 	text-align: center;
+	height: 342px;
+	width: 245px;
 }
 
 .cardName {
