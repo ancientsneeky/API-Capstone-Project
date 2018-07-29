@@ -41,9 +41,9 @@ function renderPokeResult(result) {
   const cardInfo = `${result.name}`
   const htmlDiv = `
     <div class="js-card-result col-3 searchPlaceHolder">
-      <h2>
-        <img src="${result.imageUrl}" class="pokeImg" id="${cardInfo}" alt="${cardInfo}"/>
-        <p class="cardName">${result.name}</p>
+      <img src="${result.imageUrl}" class="pokeImg" id="${cardInfo}" alt="${cardInfo}"/>
+      <h2 class="cardName">
+        <p>${result.name}</p>
       </h2>
     </div>
   `;
@@ -55,7 +55,7 @@ function renderEbayResult(result) {
   return `
     <div class="js-card-result col-3 searchPlaceHolder">
       <h2>
-      <p class="ebay Title">${result.title[0]}</p>
+      <p class="ebay title">${result.title[0]}</p>
       <p class="ebay Condition">Condition: ${result.condition[0].conditionDisplayName[0]}</p>
       <a href="${result.viewItemURL[0]}" target="_blank" rel="noopener noreferrer" class="ebay-link">
       <img src="${result.galleryURL[0]}" alt="Ebay Image of ${result.title[0]}"/>
@@ -109,6 +109,7 @@ function watchSubmit() {
   $('.js-search-form').submit(event => {
     event.preventDefault();
     getDataFromPokemonApi(getSubmitValue(), displayPOKECARDSearchData);
+    toggleHidden();
     // getDataFromEbayApi(getSubmitValue(), displayEbaySearchData);
   });
 }
@@ -118,7 +119,7 @@ function getSubmitValue(){
 }
 
 function toggleHidden() {
-  $('.result').toggleClass('hidden');
+  $('.js-search-results').toggleClass('hidden');
   $('.js-ebay-search-results').toggleClass('hidden');
 }
 
