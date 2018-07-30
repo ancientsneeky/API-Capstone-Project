@@ -34,6 +34,28 @@ h1 {
 	text-align: center;
 }
 
+.js-ebay-search-results .title,  .js-ebay-search-results .Shipping {
+	font-size: 24px;
+}
+
+.searchPlaceHolder p {
+    background: #222;
+    background: linear-gradient(#333, #222);
+    border: 1px solid #444;
+    border-radius: 5px 0 0 5px;
+    box-shadow: 0 2px 0 #000;
+    color: #888;
+    word-wrap: break-word;
+    display: block;
+    font-family: 'Cabin', helvetica, arial, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    height: 40px;
+    padding: 0 0px;
+    text-shadow: 0 -1px 0 #000;
+    width: 100%;
+}
+
 /*start of non mobile defaults*/
 /*content scaleing breaks at 788px*/
 
@@ -50,5 +72,7 @@ h1 {
 		width: 33%;
 	}
 
-	
+	.js-ebay-search-results .title,  .js-ebay-search-results .Shipping {
+	font-size: 12px;
+	}
 }

@@ -9,7 +9,7 @@
 	text-align: center;
 }
 
-/*.searchPlaceHolder:before,*/
+.searchPlaceHolder:before,
 .searchPlaceHolder:after {
 	/*content: '';*/
 	display: block;	

@@ -56,6 +56,11 @@ p {
 	z-index: 1;
 }
 
+.js-ebay-search-results img {
+	height: 140px;
+}
+
+
 .searchPlaceHolder p {
 	background: #222;	
 	background: linear-gradient(#333, #222);	

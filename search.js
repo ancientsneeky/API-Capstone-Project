@@ -58,10 +58,10 @@ function renderEbayResult(result) {
       <p class="ebay title">${result.title[0]}</p>
       <p class="ebay Condition">Condition: ${result.condition[0].conditionDisplayName[0]}</p>
       <a href="${result.viewItemURL[0]}" target="_blank" rel="noopener noreferrer" class="ebay-link">
-      <img src="${result.galleryURL[0]}" alt="Ebay Image of ${result.title[0]}"/>
+      <img class="ebayImg" src="${result.galleryURL[0]}" alt="Ebay Image of ${result.title[0]}"/>
       </a>
       <p class="ebay Price">$${result.sellingStatus[0].currentPrice[0].__value__} USD</p>
-      <p class=ebay Shipping>Shipped from: ${result.location[0]}</p>
+      <p class="ebay Shipping">Shipped from: ${result.location[0]}</p>
       </h2>
     </div>
   `;
