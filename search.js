@@ -69,8 +69,7 @@ function displayEbaySearchData(data) {
   const unnestedData = data.findItemsByKeywordsResponse[0].searchResult[0].item;
   console.log(unnestedData);
   if (!unnestedData) {
-    console.log("line 88 triggered");
-    $('.js-ebay-search-results').html("No Results Found");
+    $('.js-ebay-search-results').html(`<p class="errorReturn">No Results Found</p>`);
   } else {
     const results = unnestedData.map((item, index) => renderEbayResult(item));
     const searchUrl = data.findItemsByKeywordsResponse["0"].itemSearchURL;

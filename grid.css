@@ -69,6 +69,16 @@ h1 {
     width: 100%;
 }
 
+.errorReturn {
+	text-align: center;
+    color: #FFF;
+    word-wrap: break-word;
+    font-family: 'Cabin', helvetica, arial, sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    text-shadow: 0 -1px 0 #000;
+}
+
 /*start of non mobile defaults*/
 /*content scaleing breaks at 788px*/
 
