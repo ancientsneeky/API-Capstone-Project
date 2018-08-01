@@ -41,7 +41,7 @@ function renderPokeResult(result) {
   const cardInfo = `${result.name}`
   const htmlDiv = `
     <div class="js-card-result col-3 searchPlaceHolder">
-      <img src="${result.imageUrl}" class="pokeImg" id="${cardInfo}" alt="${cardInfo}"/>
+      <img src="${result.imageUrl}" class="pokeImg" id="${cardInfo}" alt="${cardInfo}" tabindex="0"/>
       <h2 class="cardName">
         <p>${result.name}</p>
       </h2>
@@ -124,7 +124,16 @@ function toggleHidden() {
 }
 
 function handleImageClick() {
-	console.log("line 108 called")
+  $('.js-card-result').on('keydown', event => {
+    if (event.keycode == 32) {
+      const searchTerm = event.target.id;
+      console.log(searchTerm);
+      $('.js-search-results > *').addClass('hidden');
+      $('.heading').html("Ebay Results");
+      toggleHidden();
+      getDataFromEbayApi(searchTerm, displayEbaySearchData); 
+    };
+  });  
   $('.js-card-result').on('click', event => {
     const searchTerm = event.target.id;
     console.log(searchTerm);
