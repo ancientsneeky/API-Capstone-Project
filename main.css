@@ -32,8 +32,11 @@ p {
 	padding-top: 20px;
 }
 
-.pokeImg {
+.js-card-result input {
 	text-align: center;
+}
+
+.js-card-result input[type="image"] {
 	height: 342px;
 	width: 245px;
 	padding-bottom: 10px;

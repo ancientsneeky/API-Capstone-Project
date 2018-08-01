@@ -1,11 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Cabin:400);
 
 .searchPlaceHolder {
-/*	background: #151515;
-	height: 100%;
-	position: absolute;
-	text-align: center;
-	width: 100%;*/
 	text-align: center;
 }
 
@@ -45,7 +40,7 @@
 	z-index: 1;
 }
 
-.searchPlaceHolder input {
+.searchPlaceHolder #searchBar {
 	background: #222;	
 	background: linear-gradient(#333, #222);	
 	border: 1px solid #444;
@@ -64,19 +59,23 @@
 	width: 200px;
 }
 
-.ie .searchPlaceHolder input {
+.js-card-result #searchBar {
+
+}
+
+.ie .searchPlaceHolder #searchBar {
 	line-height: 40px;
 }
 
-.searchPlaceHolder input::-webkit-input-placeholder {
+.searchPlaceHolder #searchBar::-webkit-#searchBar-placeholder {
    color: #888;
 }
 
-.searchPlaceHolder input:-moz-placeholder {
+.searchPlaceHolder #searchBar:-moz-placeholder {
    color: #888;
 }
 
-.searchPlaceHolder input:focus {
+.searchPlaceHolder #searchBar:focus {
 	animation: glow 800ms ease-out infinite alternate;
 	background: #222922;
 	background: linear-gradient(#333933, #222922);
@@ -86,15 +85,15 @@
 	outline: none;
 }
 
-.searchPlaceHolder input:focus::-webkit-input-placeholder { 
+.searchPlaceHolder #searchBar:focus::-webkit-#searchBar-placeholder { 
 	color: #efe;
 }
 
-.searchPlaceHolder input:focus:-moz-placeholder {
+.searchPlaceHolder #searchBar:focus:-moz-placeholder {
 	color: #efe;
 }
 
-.searchPlaceHolder button {
+.searchPlaceHolder button{
 	background: #222;
 	background: linear-gradient(#333, #222);
 	box-sizing: border-box;
@@ -141,4 +140,25 @@
 		border-color: #6f6;
 		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
     }
+}
+
+.ebay-search-link {
+	display: block;
+	margin: 0 auto;
+	background: #222;
+	background: linear-gradient(#333, #222);
+	box-sizing: border-box;
+	border: 1px solid #444;
+	border-left-color: #000;
+	border-radius: 0 5px 5px 0;
+	box-shadow: 0 2px 0 #000;
+	color: #fff;
+	font-family: 'Cabin', helvetica, arial, sans-serif;
+	font-size: 13px;
+	font-weight: 400;
+	height: 40px;
+	line-height: 40px;
+	padding: 0;
+	text-shadow: 0 -1px 0 #000;
+	width: 80px;
 }

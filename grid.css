@@ -34,6 +34,19 @@ h1 {
 	text-align: center;
 }
 
+.js-card-result input[type="image"] {
+	display: inline-block;
+	text-align: center;
+	height: 342px;
+	width: 245px;
+	padding-bottom: 10px;
+}
+
+.ebay-link input[type="image"] {
+	width: 115; 
+	height: 140;
+}
+
 .js-ebay-search-results .title,  .js-ebay-search-results .Shipping {
 	font-size: 24px;
 }

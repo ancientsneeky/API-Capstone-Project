@@ -1,7 +1,5 @@
 const POKECARD_SEARCH_INDEX_URL = 'https://api.pokemontcg.io/v1/cards';
-// const EBAY_SEARCH_URL = 'https://api.ebay.com/buy/browse/v1/item_summary/search';
 const EBAY_SEARCH_URL = 'http://svcs.ebay.com/services/search/FindingService/v1';
-// //working TCG API search
 
 function getDataFromPokemonApi(searchTerm, callback) {
   const settings = {
@@ -27,7 +25,8 @@ function getDataFromPokemonApi(searchTerm, callback) {
       "SECURITY-APPNAME": "ChrisMag-pokesear-PRD-48bb65212-9e1a0bc9",
       "RESPONSE-DATA-FORMAT": "json",
       callback: "_cb_findItemsByKeywords",
-      'paginationInput.entriesPerPage': 9
+      'paginationInput.entriesPerPage': 9,
+      'paginationInput.pageNumber': 3
     },    
     dataType: 'jsonp',
     type: 'GET',
@@ -37,18 +36,16 @@ function getDataFromPokemonApi(searchTerm, callback) {
 }
 
 function renderPokeResult(result) {
-  // console.log(result);
   const cardInfo = `${result.name}`
   const htmlDiv = `
     <div class="js-card-result col-3 searchPlaceHolder">
-      <img src="${result.imageUrl}" class="pokeImg" id="${cardInfo}" alt="${cardInfo}" tabindex="0"/>
+      <input type="image" src="${result.imageUrl}" id="${cardInfo}" alt="${cardInfo}" role="button" aria-pressed="false" class="pokeImg">
       <h2 class="cardName">
         <p>${result.name}</p>
       </h2>
     </div>
   `;
   return htmlDiv;
-      // </a> by <a class="js-channel-name" href="https://www.POKECARD.com/channel/${result.snippet.channelId}"> ${result.snippet.channelTitle}</a>
 }
 
 function renderEbayResult(result) {
@@ -67,37 +64,27 @@ function renderEbayResult(result) {
   `;
 }
 
-// function renderPageButtons(){
-//   return `    
-//   <a href="#" class="previous hidden">&laquo; Previous</a>
-//   <a href="#" class="next">Next &raquo;</a>
-//   `
-// }
-
-// function PageCountPlusOne() {
-//   pageCount++;
-// }
-
-// function emptySearchForm(){
-//   $('.js-search-page-button').empty();
-//   $('.js-search-results').empty();
-// }
-
 function displayEbaySearchData(data) {
   console.log(data);
-  const unnestedData = data.findItemsByKeywordsResponse["0"].searchResult[0].item;
+  const unnestedData = data.findItemsByKeywordsResponse[0].searchResult[0].item;
   console.log(unnestedData);
-  const results = unnestedData.map((item, index) => renderEbayResult(item));
-  $('.js-ebay-search-results').html(results);
+  if (!unnestedData) {
+    console.log("line 88 triggered");
+    $('.js-ebay-search-results').html("No Results Found");
+  } else {
+    const results = unnestedData.map((item, index) => renderEbayResult(item));
+    const searchUrl = data.findItemsByKeywordsResponse["0"].itemSearchURL;
+    console.log(searchUrl)
+    const viewOnEbay = ebayPageButton(searchUrl);
+    console.log(viewOnEbay);
+    $('.js-ebay-search-results').html(results);
+    $('.bottom').html(viewOnEbay);
+    $('.bottom').removeClass('hidden');
+  }
 }
 
 function displayPOKECARDSearchData(data) {
-  console.log(data);
   const results = data.cards.map((item, index) => renderPokeResult(item));
-  // $('.js-search-page-button').html(renderPageButtons());
-  // handleNextButton(data);
-  // handlePrevButton(data);
-  // displayPrevButton();
   const heading = $('.heading');
   heading.html("Results");
   heading.toggleClass('hidden');
@@ -105,12 +92,23 @@ function displayPOKECARDSearchData(data) {
   handleImageClick();
 }
 
+function ebayPageButton(searchUrl) {
+  return `<a href="${searchUrl}" target="_blank" rel="noopener noreferrer" class="ebay-search-link">View On Ebay</a>`
+}
+
+function watchButtonClick(data) {
+  $('ebayPageBtn').on('click', event => {
+
+  });
+}
+
 function watchSubmit() {
   $('.js-search-form').submit(event => {
     event.preventDefault();
     getDataFromPokemonApi(getSubmitValue(), displayPOKECARDSearchData);
+    $('.js-ebay-search-results').html(" ");
+    $('.bottom').html(" ");
     toggleHidden();
-    // getDataFromEbayApi(getSubmitValue(), displayEbaySearchData);
   });
 }
 
@@ -124,17 +122,7 @@ function toggleHidden() {
 }
 
 function handleImageClick() {
-  $('.js-card-result').on('keydown', event => {
-    if (event.keycode == 32) {
-      const searchTerm = event.target.id;
-      console.log(searchTerm);
-      $('.js-search-results > *').addClass('hidden');
-      $('.heading').html("Ebay Results");
-      toggleHidden();
-      getDataFromEbayApi(searchTerm, displayEbaySearchData); 
-    };
-  });  
-  $('.js-card-result').on('click', event => {
+  $('.pokeImg').on('click', event => {
     const searchTerm = event.target.id;
     console.log(searchTerm);
     $('.js-search-results > *').addClass('hidden');
@@ -143,38 +131,5 @@ function handleImageClick() {
     getDataFromEbayApi(searchTerm, displayEbaySearchData); 
   });
 }
-
-// function pageCountMinusOne(){
-//   pageCount--;
-// }
-
-// function handleNextButton(data) {
-//   $('.next').on('click', event => {
-//     event.preventDefault();
-//     emptySearchForm();
-//     const pageTokenArg = data.nextPageToken
-//     getDataFromApi(getSubmitValue(), displayPOKECARDSearchData, pageTokenArg);
-//     PageCountPlusOne();
-//   });
-// }
-
-// function displayPrevButton() {
-//   const $prevBtn = $('a.previous');
-//   if (pageCount < 1) {
-//   $prevBtn.addClass('hidden');
-//   }
-//   else {
-//   $prevBtn.removeClass('hidden');
-//   }
-// }
-
-// function handlePrevButton(data) {
-//   $('.previous').on('click', event => {
-//     pageCountMinusOne();
-//     const pageTokenArg = data.prevPageToken;
-//     getDataFromApi(getSubmitValue(), displayPOKECARDSearchData, pageTokenArg);
-//     displayPrevButton();
-//     });
-// }
 
 $(watchSubmit);
