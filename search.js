@@ -14,7 +14,7 @@ function getDataFromPokemonApi(searchTerm, callback) {
   $.ajax(settings);
 }
 
-  function getDataFromEbayApi(searchTerm, callback) {
+  function getDataFromEbayApi(searchTerm, callback, page = 1, entriesOnPage = 9 ) {
   const settings = {
     url: EBAY_SEARCH_URL,
     data: {
@@ -25,8 +25,8 @@ function getDataFromPokemonApi(searchTerm, callback) {
       "SECURITY-APPNAME": "ChrisMag-pokesear-PRD-48bb65212-9e1a0bc9",
       "RESPONSE-DATA-FORMAT": "json",
       callback: "_cb_findItemsByKeywords",
-      'paginationInput.entriesPerPage': 9,
-      'paginationInput.pageNumber': 3
+      'paginationInput.entriesPerPage': entriesOnPage,
+      'paginationInput.pageNumber': page
     },    
     dataType: 'jsonp',
     type: 'GET',
@@ -65,17 +65,13 @@ function renderEbayResult(result) {
 }
 
 function displayEbaySearchData(data) {
-  console.log(data);
   const unnestedData = data.findItemsByKeywordsResponse[0].searchResult[0].item;
-  console.log(unnestedData);
   if (!unnestedData) {
     $('.js-ebay-search-results').html(`<p class="errorReturn">No Results Found</p>`);
   } else {
     const results = unnestedData.map((item, index) => renderEbayResult(item));
     const searchUrl = data.findItemsByKeywordsResponse["0"].itemSearchURL;
-    console.log(searchUrl)
     const viewOnEbay = ebayPageButton(searchUrl);
-    console.log(viewOnEbay);
     $('.js-ebay-search-results').html(results);
     $('.bottom').html(viewOnEbay);
     $('.bottom').removeClass('hidden');
@@ -123,7 +119,6 @@ function toggleHidden() {
 function handleImageClick() {
   $('.pokeImg').on('click', event => {
     const searchTerm = event.target.id;
-    console.log(searchTerm);
     $('.js-search-results > *').addClass('hidden');
     $('.heading').html("Ebay Results");
     toggleHidden();
