@@ -1,5 +1,5 @@
 const POKECARD_SEARCH_INDEX_URL = 'https://api.pokemontcg.io/v1/cards';
-const EBAY_SEARCH_URL = 'http://svcs.ebay.com/services/search/FindingService/v1';
+const EBAY_SEARCH_URL = 'https://svcs.ebay.com/services/search/FindingService/v1';
 
 function getDataFromPokemonApi(searchTerm, callback) {
   const settings = {
