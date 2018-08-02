@@ -12,7 +12,7 @@
 <ol>
 	<li><span class="caps">HTML</span></li>
 	<li><span class="caps">CSS</span></li>
-	<li>Javascrip</li>
+	<li>Javascript</li>
 	<li>jQuery</li>
 </ol>
 <h2>Demo</h2>
