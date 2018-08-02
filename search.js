@@ -79,22 +79,18 @@ function displayEbaySearchData(data) {
 }
 
 function displayPOKECARDSearchData(data) {
+  const cardArray = data.cards;
+  if (cardArray < 1) {
+    $('.js-search-results').html(`<p class="errorReturn">No Results Found</p>`);
+  } else {
   const results = data.cards.map((item, index) => renderPokeResult(item));
-  const heading = $('.heading');
-  heading.html("Results");
-  heading.toggleClass('hidden');
   $('.js-search-results').html(results);
   handleImageClick();
+  }
 }
 
 function ebayPageButton(searchUrl) {
   return `<a href="${searchUrl}" target="_blank" rel="noopener noreferrer" class="ebay-search-link">View On Ebay</a>`
-}
-
-function watchButtonClick(data) {
-  $('ebayPageBtn').on('click', event => {
-
-  });
 }
 
 function watchSubmit() {
@@ -103,7 +99,7 @@ function watchSubmit() {
     getDataFromPokemonApi(getSubmitValue(), displayPOKECARDSearchData);
     $('.js-ebay-search-results').html(" ");
     $('.bottom').html(" ");
-    toggleHidden();
+    toggleHiddenTCG();
   });
 }
 
@@ -111,7 +107,15 @@ function getSubmitValue(){
   return $('.js-query').val();
 }
 
-function toggleHidden() {
+function toggleHiddenTCG() {
+  const heading = $('.heading');
+  heading.html("Results");
+  heading.removeClass('hidden');
+  $('.js-search-results').removeClass('hidden');
+  $('.js-ebay-search-results').toggleClass('hidden');
+}
+
+function toggleHiddenEbay() {
   $('.js-search-results').toggleClass('hidden');
   $('.js-ebay-search-results').toggleClass('hidden');
 }
@@ -121,7 +125,7 @@ function handleImageClick() {
     const searchTerm = event.target.id;
     $('.js-search-results > *').addClass('hidden');
     $('.heading').html("Ebay Results");
-    toggleHidden();
+    toggleHiddenEbay();
     getDataFromEbayApi(searchTerm, displayEbaySearchData); 
   });
 }
