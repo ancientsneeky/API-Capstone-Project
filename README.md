@@ -16,4 +16,4 @@
 	<li>jQuery</li>
 </ol>
 <h2>Demo</h2>
-<p>- [Live Demo](https://ancientsneeky.github.io/Pokemon-<span class="caps">TCG</span>-Lookup/)</p>
+<p>- [Live Demo](https://ancientsneeky.github.io/Pokemon-TCG-Lookup/)</p>
