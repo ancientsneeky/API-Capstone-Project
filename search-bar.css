@@ -50,13 +50,13 @@
 	display: block;
 	float: left;
 	font-family: 'Cabin', helvetica, arial, sans-serif;
-	font-size: 13px;
+	font-size: 26px;
 	font-weight: 400;
-	height: 40px;
+	height: 80px;
 	margin: 0;
 	padding: 0 10px;
 	text-shadow: 0 -1px 0 #000;
-	width: 200px;
+	width: 400px;
 }
 
 .js-card-result #searchBar {
@@ -105,15 +105,15 @@
 	display: block;
 	float: left;
 	font-family: 'Cabin', helvetica, arial, sans-serif;
-	font-size: 13px;
+	font-size: 26px;
 	font-weight: 400;
-	height: 40px;
-	line-height: 40px;
+	height: 80px;
+	line-height: 80px;
 	margin: 0;
 	padding: 0;
 	position: relative;
 	text-shadow: 0 -1px 0 #000;
-	width: 80px;
+	width: 160px;
 }	
 
 .searchPlaceHolder button:hover,
