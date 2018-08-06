@@ -65,7 +65,6 @@ function renderEbayResult(result) {
 }
 
 function makeBackButton(viewOnEbay) {
-  console.log("back button made");
   $('.js-search-page-button').html(`<input id="backBtn" type="button" value="Back" role="button"/>`);
   $('.js-search-page-button').removeClass('hidden');
   $('.bottom').append(viewOnEbay);
@@ -119,7 +118,6 @@ function getSubmitValue(){
 }
 
 function toggleHiddenTCG() {
-  console.log("toggle tcg");
   const heading = $('.heading');
   heading.html("Results");
   heading.removeClass('hidden');
