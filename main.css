@@ -81,3 +81,22 @@ p {
 	text-shadow: 0 -1px 0 #000;
 	width: 100%;
 }
+
+.js-search-page-button input {
+	background: #222;
+	background: linear-gradient(#333, #222);
+	box-sizing: border-box;
+	border: 1px solid #444;
+	border-left-color: #000;
+	border-radius: 0 5px 5px 0;
+	box-shadow: 0 2px 0 #000;
+	color: #fff;
+	font-family: 'Cabin', helvetica, arial, sans-serif;
+	font-size: 26px;
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	text-shadow: 0 -1px 0 #000;
+	width: 160px;
+}	

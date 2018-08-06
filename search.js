@@ -14,7 +14,7 @@ function getDataFromPokemonApi(searchTerm, callback) {
   $.ajax(settings);
 }
 
-  function getDataFromEbayApi(searchTerm, callback, page = 1, entriesOnPage = 9 ) {
+  function getDataFromEbayApi(searchTerm, callback, page = 1,entriesOnPage = 9 ) {
   const settings = {
     url: EBAY_SEARCH_URL,
     data: {
@@ -64,6 +64,16 @@ function renderEbayResult(result) {
   `;
 }
 
+function makeBackButton(viewOnEbay) {
+  $('.js-search-page-button').html(`<input type="button" value="Back" />`);
+  $('.js-search-page-button').removeClass('hidden');
+  $('.bottom').append(viewOnEbay);
+  $('.bottom').removeClass('hidden');
+  $('.js-search-page-button').on('click', event => {
+    toggleHiddenTCG();
+  });
+}
+
 function displayEbaySearchData(data) {
   const unnestedData = data.findItemsByKeywordsResponse[0].searchResult[0].item;
   if (!unnestedData) {
@@ -73,8 +83,7 @@ function displayEbaySearchData(data) {
     const searchUrl = data.findItemsByKeywordsResponse["0"].itemSearchURL;
     const viewOnEbay = ebayPageButton(searchUrl);
     $('.js-ebay-search-results').html(results);
-    $('.bottom').html(viewOnEbay);
-    $('.bottom').removeClass('hidden');
+    makeBackButton(viewOnEbay);
   }
 }
 
@@ -98,7 +107,7 @@ function watchSubmit() {
     event.preventDefault();
     getDataFromPokemonApi(getSubmitValue(), displayPOKECARDSearchData);
     $('.js-ebay-search-results').html(" ");
-    $('.bottom').html(" ");
+    $('.bottom').html("");
     toggleHiddenTCG();
   });
 }
@@ -113,6 +122,7 @@ function toggleHiddenTCG() {
   heading.removeClass('hidden');
   $('.js-search-results').removeClass('hidden');
   $('.js-ebay-search-results').toggleClass('hidden');
+  $('.js-search-page-button').html("");
 }
 
 function toggleHiddenEbay() {
