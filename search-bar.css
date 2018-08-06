@@ -36,7 +36,7 @@
 	display: inline-block;
 	font-size: 0px;
 	margin: 0 auto;
-	padding: 20px;
+	padding: 10px;
 	z-index: 1;
 }
 
@@ -52,11 +52,11 @@
 	font-family: 'Cabin', helvetica, arial, sans-serif;
 	font-size: 26px;
 	font-weight: 400;
-	height: 80px;
+	height: 40px;
 	margin: 0;
 	padding: 0 10px;
 	text-shadow: 0 -1px 0 #000;
-	width: 400px;
+	width: 200px;
 }
 
 .js-card-result #searchBar {
@@ -107,13 +107,13 @@
 	font-family: 'Cabin', helvetica, arial, sans-serif;
 	font-size: 26px;
 	font-weight: 400;
-	height: 80px;
-	line-height: 80px;
+	height: 40px;
+	line-height: 40px;
 	margin: 0;
 	padding: 0;
 	position: relative;
 	text-shadow: 0 -1px 0 #000;
-	width: 160px;
+	width: 80px;
 }	
 
 .searchPlaceHolder button:hover,

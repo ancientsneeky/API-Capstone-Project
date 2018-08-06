@@ -65,12 +65,14 @@ function renderEbayResult(result) {
 }
 
 function makeBackButton(viewOnEbay) {
-  $('.js-search-page-button').html(`<input type="button" value="Back" />`);
+  console.log("back button made");
+  $('.js-search-page-button').html(`<input id="backBtn" type="button" value="Back" role="button"/>`);
   $('.js-search-page-button').removeClass('hidden');
   $('.bottom').append(viewOnEbay);
   $('.bottom').removeClass('hidden');
-  $('.js-search-page-button').on('click', event => {
+  $('#backBtn').on('click', event => {
     toggleHiddenTCG();
+    $('.js-search-page-button').html("");
   });
 }
 
@@ -107,7 +109,7 @@ function watchSubmit() {
     event.preventDefault();
     getDataFromPokemonApi(getSubmitValue(), displayPOKECARDSearchData);
     $('.js-ebay-search-results').html(" ");
-    $('.bottom').html("");
+    $('.js-search-page-button').html("");
     toggleHiddenTCG();
   });
 }
@@ -117,12 +119,12 @@ function getSubmitValue(){
 }
 
 function toggleHiddenTCG() {
+  console.log("toggle tcg");
   const heading = $('.heading');
   heading.html("Results");
   heading.removeClass('hidden');
   $('.js-search-results').removeClass('hidden');
   $('.js-ebay-search-results').toggleClass('hidden');
-  $('.js-search-page-button').html("");
 }
 
 function toggleHiddenEbay() {
