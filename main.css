@@ -4,7 +4,8 @@ body {
 	background-image: url("img/background.jpg");
 	background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;    
+    background-size: cover;
+    max-width: 1000px;   
     margin-left: auto;      
     margin-right: auto;  
 }
@@ -83,6 +84,8 @@ p {
 
 .js-search-page-button input {
 	background: #222;
+	display: inline-block;
+	position: relative;
 	background: linear-gradient(#333, #222);
 	box-sizing: border-box;
 	border: 1px solid #444;
@@ -93,9 +96,8 @@ p {
 	font-family: 'Cabin', helvetica, arial, sans-serif;
 	font-size: 26px;
 	font-weight: 400;
-	margin: 0;
+	margin-left: 5%;
 	padding: 0;
-	position: relative;
 	text-shadow: 0 -1px 0 #000;
 	width: 160px;
 }	
