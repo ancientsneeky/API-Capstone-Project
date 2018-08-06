@@ -36,7 +36,7 @@
 	display: inline-block;
 	font-size: 0px;
 	margin: 0 auto;
-	padding: 20px;
+	padding: 10px;
 	z-index: 1;
 }
 
@@ -50,7 +50,7 @@
 	display: block;
 	float: left;
 	font-family: 'Cabin', helvetica, arial, sans-serif;
-	font-size: 13px;
+	font-size: 26px;
 	font-weight: 400;
 	height: 40px;
 	margin: 0;
@@ -105,7 +105,7 @@
 	display: block;
 	float: left;
 	font-family: 'Cabin', helvetica, arial, sans-serif;
-	font-size: 13px;
+	font-size: 26px;
 	font-weight: 400;
 	height: 40px;
 	line-height: 40px;

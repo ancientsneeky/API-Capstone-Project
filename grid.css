@@ -42,13 +42,12 @@ h1 {
 	padding-bottom: 10px;
 }
 
-.ebay-link input[type="image"] {
+.ebayImg {
 	width: 115; 
 	height: 140;
 }
 
 .js-ebay-search-results .title,  .js-ebay-search-results .Shipping, .ebayImg {
-	font-size: 24px;
 	margin: 10px 0;
 }
 
